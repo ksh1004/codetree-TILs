@@ -14,7 +14,9 @@ def lcm(a, b):
 
 
 def func(num_list):
-    if len(num_list) == 2:
+    if len(num_list) == 1:
+        return num_list[0]
+    elif len(num_list) == 2:
         return lcm(num_list[0], num_list[1])
     else:
         return lcm(num_list[0], func(num_list[1:]))
