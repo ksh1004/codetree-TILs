@@ -7,6 +7,6 @@ class cls:
 
 code, location, time = input().split()
 cls1 = cls(code, location, time)
-print(f'secret code : {code}')
-print(f'meeting point : {location}')
-print(f'time : {time}')
+print(f'secret code : {cls1.code}')
+print(f'meeting point : {cls1.location}')
+print(f'time : {cls1.time}')
