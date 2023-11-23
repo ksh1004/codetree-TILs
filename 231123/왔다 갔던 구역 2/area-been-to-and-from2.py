@@ -7,7 +7,7 @@ for i in range(n):
     num, order = input().split()
     num = int(num)
     if(order == 'L'):
-        for j in range(idx, idx - num, -1):
+        for j in range(idx - num, idx):
             cnt[j] += 1
         idx = idx - num
     else:
