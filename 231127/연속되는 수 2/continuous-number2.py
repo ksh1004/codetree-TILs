@@ -3,7 +3,6 @@ num_list = []
 for i in range(N):
     num = int(input())
     num_list.append(num)
-num_list.sort()
 max_val = 0 # 횟수 최댓값
 val = 0 # 숫자값
 cnt = 0 # 횟수를 세는 변수
