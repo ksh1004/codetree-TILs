@@ -21,10 +21,10 @@ for i in range(len(num_list)):
             if(i == len(num_list) - 1): # 만약 현재 값이 마지막 값이라면
                 if(max_val < cnt): # 현재의 횟수값이 max 값보다 크다면
                     max_val = cnt # 현재값을 max 값으로
-        else:
+        else:  # 만약 직전 값과 현재 값과 다른 숫자이면
             if(max_val < cnt): # 현재의 횟수값이 max 값보다 크다면
                 max_val = cnt # 현재값을 max 값으로
-            cnt = 0 # 횟수 초기화
+            cnt = 1 # 횟수 초기화
             val = num_list[i] # 숫자값 최신화
 # 출력
 print(max_val)
