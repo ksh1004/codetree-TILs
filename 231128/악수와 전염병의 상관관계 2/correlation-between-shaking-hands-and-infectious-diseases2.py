@@ -87,10 +87,10 @@ for i in range(251):
             #if(i == 8):
                 #print(f'num_list[j][i]은: {num_list[j][i]}')
 # 출력
-print(num_list[1][1:10])
-print(num_list[2][1:10])
-print(num_list[3][1:10])
-print(num_list[4][1:10])
+#print(num_list[1][1:10])
+#print(num_list[2][1:10])
+#print(num_list[3][1:10])
+#print(num_list[4][1:10])
 for i in range(1, N + 1):
     if(num_list[i][250] >= 1):
         print(1, end = '')
