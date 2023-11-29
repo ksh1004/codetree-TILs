@@ -19,7 +19,7 @@ for i in range(t):
         r, c = nx, ny
     elif(nx < 1 or nx > n or ny < 1 or ny > n): # 이동한 값이 격자 밖이라면
         direction = 3 - direction # 이동방향 반대방향으로 변경
-    print(r, c, direction)
+    #print(r, c, direction)
 # 출력
-print('출력')
+#print('출력')
 print(r, c)
