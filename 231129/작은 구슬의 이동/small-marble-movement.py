@@ -17,7 +17,7 @@ for i in range(t):
     nx, ny = r + dy[direction], c + dx[direction]
     if(nx >= 1 and nx <= n and ny >= 1 and ny <= n): # 이동한 값이 격자 안이라면
         r, c = nx, ny
-    else: # 이동한 값이 격자 밖이라면
+    elif(nx < 1 or nx > n or ny < 1 or ny > n): # 이동한 값이 격자 밖이라면
         direction = 3 - direction # 이동방향 반대방향으로 변경
 # 출력
 print(r, c)
