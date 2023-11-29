@@ -16,18 +16,26 @@ for i in range(M):
 cnt = 0
 val = ''
 for i in range(1, len(A)):
-    if(i == 1):
-        cnt += 1
-        if(A[i] >= B[i]):
+    if(i == 1): # 첫 번째의 경우
+        cnt += 1 # 첫 번째 명예의 전당도 횟수에 포함
+        if(A[i] > B[i]): # A가 B보다 클 때
             val = 'A'
-        else:
+        elif(A[i] < B[i]): # B가 A보다 클 때
             val = 'B'
+        else: # A와 B가 같을 때
+            val = 'AB'
     else:
-        if(A[i] >= B[i] and val == 'B'):
-            cnt += 1
-            val = 'B'
-        elif(A[i] < B[i] and val == 'A'):
-            cnt += 1
-            val = 'A'
+        if(A[i] > B[i]): # A가 B보다 클 때
+            if(val != 'A'):
+                cnt += 1
+                val = 'A'
+        elif(A[i] < B[i]): # B가 A보다 클 때
+            if(val != 'B'):
+                cnt += 1
+                val = 'B'
+        else:
+            if(val != 'AB'): # A와 B가 같을 때
+                cnt += 1
+                val = 'AB'
 # 출력
 print(cnt)
