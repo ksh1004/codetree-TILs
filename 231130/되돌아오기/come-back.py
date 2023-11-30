@@ -17,7 +17,7 @@ for i in range(N):
     for j in range(t):
         cnt += 1
         x, y = x + dx[direction], y + dy[direction]
-        if(x == 0 and y == 0):
+        if(x == 0 and y == 0 and idx == -1): # idx == -1은, 처음으로 0으로 다시 돌아오는 경우만 저장하기 위해서
             idx = cnt
 # 출력
 print(idx)
