@@ -1,6 +1,6 @@
 n, m = map(int, input().split())
-num_list = [[0 for _ in range(n)] for _ in range(m)] # n * m 직사각형
-dx, dy= [1, 0, -1, 0], [0, 1, 0, -1] # 남, 동, 북, 서 순서
+num_list = [[0 for _ in range(m)] for _ in range(n)] # n * m 직사각형
+dx, dy = [1, 0, -1, 0], [0, 1, 0, -1] # 남, 동, 북, 서 순서
 # 범위함수
 def in_range(x, y):
     return (0 <= x and x < n and 0 <= y and y < m)
