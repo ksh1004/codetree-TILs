@@ -3,7 +3,7 @@ num_list = [[0 for _ in range(n)] for _ in range(m)] # n * m 직사각형
 dx, dy= [1, 0, -1, 0], [0, 1, 0, -1] # 남, 동, 북, 서 순서
 # 범위함수
 def in_range(x, y):
-    return (0 <= x and x < m and 0 <= y and y < n)
+    return (0 <= x and x < n and 0 <= y and y < m)
 # 시뮬레이션 함수
 def simulate(x, y, direction):
     for i in range(2, n * m + 1):
