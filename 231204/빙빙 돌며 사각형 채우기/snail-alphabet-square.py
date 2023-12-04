@@ -12,7 +12,7 @@ def simulate(x, y, direction):
     for i in range(2, n * m + 1):
         nx, ny = x + dx[direction], y + dy[direction]
         if(in_range(nx, ny) == 1 and str_list[nx][ny] == '-'): # 범위 안에 있고 초기화가 안되었다면
-            if(s == 91): # 만약 문자가 Z 이후이면
+            if(s == 90): # 만약 문자가 Z 이후이면
                 s = 65 # A로 초기화
             else:
                 s += 1
@@ -20,7 +20,7 @@ def simulate(x, y, direction):
         else:
             direction = (direction + 1) % 4 # 방향 전환
             nx, ny = x + dx[direction], y + dy[direction]
-            if(s == 91): # 만약 문자가 Z 이후이면
+            if(s == 90): # 만약 문자가 Z 이후이면
                 s = 65 # A로 초기화
             else:
                 s += 1
