@@ -1,5 +1,5 @@
 N = int(input())
-num_list = list(map(float, input().split()))
+num_list = list(map(int, input().split()))
 cnt = 0 # 횟수
 for i in range(N): # 구간의 시작 인덱스
     for j in range(i, N): # 구간의 끝 인덱스
