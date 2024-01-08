@@ -6,7 +6,7 @@ for i in range(N): # 구간의 시작 인덱스
         temp = 0 # 현재 구간 합
         temp_cnt = 0 # 구간의 크기
         for k in range(i, j + 1):
-            temp = num_list[k] # 구간 값 추가
+            temp += num_list[k] # 구간 값 추가
             temp_cnt += 1 # 크기 1 증가
         temp_avg = temp / temp_cnt # 구간의 평균값
         check = False
