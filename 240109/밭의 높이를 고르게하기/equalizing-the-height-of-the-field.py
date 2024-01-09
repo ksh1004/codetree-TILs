@@ -1,6 +1,6 @@
 N, H, T = map(int, input().split())
 num_list = list(map(int, input().split()))
-min_val = float('inf')
+min_val = 999999999
 # 최소 비용 계산
 for i in range(N - T + 1):
     temp = 0
