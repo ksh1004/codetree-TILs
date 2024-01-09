@@ -5,7 +5,7 @@ min_val = float('inf')
 for i in range(N - T + 1):
     temp = 0
     for j in range(i, i + T):
-        temp += abs(H - j)
+        temp += abs(j - H)
     if(temp < min_val):
         min_val = temp
 # 출력
