@@ -11,5 +11,8 @@ for i in range(K, 100 - K): # K 부터 100 - K 까지
         temp += num_list[j]
     if(max_val < temp): # 기존 최댓값보다 현재 값이 더 크면
         max_val = temp # 최댓값 변경
+if(K >= 100 - K): # 100 - K보다 K가 더 큰 경우(즉, 구간 계산이 안되는 경우)
+    max_val = sum(num_list)
+
 # 출력
 print(max_val)
