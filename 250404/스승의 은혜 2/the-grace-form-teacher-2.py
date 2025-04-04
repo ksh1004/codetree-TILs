@@ -1,5 +1,6 @@
 N, B = map(int, input().split())
 P = [int(input()) for _ in range(N)]
+P.sort()
 max_student = 0
 
 for i in range(N):
