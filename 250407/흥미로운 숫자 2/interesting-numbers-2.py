@@ -20,6 +20,9 @@ for i in range(X, Y + 1):
                 second_cnt += 1
             elif(second_val == val[j]):
                 second_cnt += 1
+                if(first_cnt > 1 and second_cnt > 1):
+                    check_val = 0
+                    break
             else:
                 check_val = 0
                 break
