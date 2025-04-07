@@ -9,29 +9,18 @@ for i in range(X, Y + 1):
     check_val = 1
     for j in range(len(val)):
         if(first_val == val[j]):
-            if(first_cnt <= 1 or second_cnt <= 1):
-                first_cnt += 1
-            else:
-                check_val = 0
-                break
+            first_cnt += 1
+        elif(second_val == ''):
+            second_val = val[j]
+            second_cnt += 1
+        elif(second_val == val[j]):
+            second_cnt += 1
         else:
-            if(second_val == ''):
-                second_val = val[j]
-                second_cnt += 1
-            elif(second_val == val[j]):
-                second_cnt += 1
-                if(first_cnt > 1 and second_cnt > 1):
-                    check_val = 0
-                    break
-            else:
-                check_val = 0
-                break
-        if(j == (len(val) - 1)):
-            if((second_cnt == 0)): # 오직 한 가지 숫자로만 되어 있는 경우
-                check_val = 0
-    
-    # 확인
-    if(check_val):
+            check_val = 0
+            break
+    if((check_val == 1) and (first_cnt > 1 and second_cnt == 1)
+    or (first_cnt == 1 and second_cnt > 1)):
         cnt += 1
+    
 # 출력
 print(cnt)
