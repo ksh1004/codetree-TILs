@@ -18,7 +18,7 @@ for i in range(X, Y + 1):
         else:
             check_val = 0
             break
-    if((check_val == 1) and (first_cnt > 1 and second_cnt == 1)
+    if(check_val == 1) and ((first_cnt > 1 and second_cnt == 1)
     or (first_cnt == 1 and second_cnt > 1)):
         cnt += 1
     
