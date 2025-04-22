@@ -8,10 +8,6 @@ for i in range(N):
     doubled_list[i] *= 2
 
     for j in range(N):
-        # j번째 값을 제거
-        if i == j:
-            continue  # 같은 인덱스를 제거하는 건 무의미하므로 스킵
-
         temp_list = doubled_list[:j] + doubled_list[j+1:]
 
         now_total = 0
