@@ -7,6 +7,8 @@ for i in range(N):
     doubled_list[i] *= 2
     now_total = 0
     for j in range(N):
+        if(i == j):
+            continue
         temp_list = doubled_list[:j] + doubled_list[j+1:] # 하나의 숫자를 제거
         for k in range(1, len(temp_list)):
             val = abs(temp_list[k] - temp_list[k - 1])
