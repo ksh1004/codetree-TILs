@@ -1,17 +1,26 @@
-N = int(input())
-num_list = [1] * 11
-x2 = 1
-for i in range(N):
-    a, b = map(int, input().split())
-    x2 = x2 * 2
-    for j in range(1, 11):
-        if(a <= j * x2 and j * x2 <= b):
-            continue
-        else:
-            num_list[j] = 0
-min_val = 0
-for i in range(1, 11):
-    if(num_list[i] == 1):
-        min_val = i
+MAX_NUM = 10000
+
+# 변수 선언 및 입력:
+n = int(input())
+conditions = [
+    tuple(map(int, input().split()))
+    for _ in range(n)
+]
+
+# x에서 시작하는 것이 가능한지 판단
+def satisfy(x):
+    for a, b in conditions:
+        # 계속 2배씩 해주며 a <= x <= b를 항상 만족하는지 확인
+        # 아니라면, False를 반환
+        x *= 2
+        if x < a or x > b:
+            return False
+    return True
+
+# 가능한 모든 범위에 대해 탐색
+# 1 ~ MAX_NUM 사이가 아니라면 애초에 처음부터 불가능
+for x in range(1, MAX_NUM + 1):
+    # 만족하는 x가 있다면 해당 x가 최소이므로 출력
+    if satisfy(x):
+        print(x)
         break
-print(min_val)
