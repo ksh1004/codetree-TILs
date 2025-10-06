@@ -1,45 +1,49 @@
-def solve():
-    import sys
-    input = sys.stdin.readline
+def bisect_left(a, x):
+    lo, hi = 0, len(a)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if a[mid] < x:
+            lo = mid + 1
+        else:
+            hi = mid
+    return lo
 
+def bisect_right(a, x):
+    lo, hi = 0, len(a)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if a[mid] <= x:
+            lo = mid + 1
+        else:
+            hi = mid
+    return lo
+
+def solve():
     N, K = map(int, input().split())
     arr = list(map(int, input().split()))
     arr.sort()
 
-    prefix = [0] * (N + 1)  # 누적합
+    # 누적합
+    prefix = [0] * (N + 1)
     for i in range(N):
         prefix[i+1] = prefix[i] + arr[i]
 
-    # 특정 구간 [L, L+D] 안에 모두 넣을 때 비용 계산
-    def cost(L, D):
-        R = L + D
-        # 왼쪽: arr < L
-        # 오른쪽: arr > R
-        import bisect
-        li = bisect.bisect_left(arr, L)   # arr[0..li-1] < L
-        ri = bisect.bisect_right(arr, R)  # arr[ri..N-1] > R
+    ans = float('inf')
 
-        left_cost = L*li - prefix[li]
-        right_cost = (prefix[N] - prefix[ri]) - R*(N-ri)
-        return left_cost + right_cost
+    for i in range(N):
+        L = arr[i]
+        R = L + K
 
-    # 이분 탐색
-    lo, hi = 0, arr[-1] - arr[0]
-    ans = hi
+        # 왼쪽 비용 (arr < L)
+        li = bisect_left(arr, L)
+        left_cost = L * li - prefix[li]
 
-    while lo <= hi:
-        mid = (lo + hi) // 2
-        ok = False
-        # arr 원소들을 시작점 후보로 잡기
-        for a in arr:
-            if cost(a, mid) <= K:
-                ok = True
-                break
-        if ok:
-            ans = mid
-            hi = mid - 1
-        else:
-            lo = mid + 1
+        # 오른쪽 비용 (arr > R)
+        ri = bisect_right(arr, R)
+        right_cost = (prefix[N] - prefix[ri]) - R * (N - ri)
+
+        total_cost = left_cost + right_cost
+        ans = min(ans, total_cost)
 
     print(ans)
 
