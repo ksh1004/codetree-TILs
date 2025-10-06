@@ -1,32 +1,50 @@
-def solve():
-    N, K = map(int, input().split())
-    arr = list(map(int, input().split()))
-    arr.sort()
+# 입력
+n, k = map(int, input().split())
+num_list = list(map(int, input().split()))
+num_list.sort()  # 정렬
 
-    prefix = [0] * (N + 1)
-    for i in range(N):
-        prefix[i+1] = prefix[i] + arr[i]
+min_num, max_num = num_list[0], num_list[-1]
+diff_need_to_be_modified = (max_num - min_num) - k
+if diff_need_to_be_modified <= 0:
+    print(0)
+    exit()
 
-    ans = float('inf')
-    j = 0
+# 누적합 계산
+prefix_sum = [0] * (n + 1)
+for i in range(n):
+    prefix_sum[i+1] = prefix_sum[i] + num_list[i]
 
-    for i in range(N):
-        # arr[i]를 L로 잡았을 때 [L, L+K] 안에 들어가는 구간의 오른쪽 끝 찾기
-        while j < N and arr[j] <= arr[i] + K:
-            j += 1
+# get_cost_from_bottom(i) 최적화
+def get_cost_from_bottom(num_to_add):
+    target = min_num + num_to_add
+    import bisect
+    idx = 0
+    for i, num in enumerate(num_list):
+        if num >= target:
+            idx = i
+            break
+    else:
+        idx = n
+    # idx 이전 값들을 올려야 함
+    cost = target * idx - prefix_sum[idx]
+    return cost
 
-        # [i, j-1] 구간이 안에서 유지되는 부분
-        # 왼쪽 비용 (arr[0..i-1]을 arr[i]로 올리기)
-        left_cost = arr[i] * i - prefix[i]
+# get_cost_from_top(j) 최적화
+def get_cost_from_top(num_to_minus):
+    target = max_num - num_to_minus
+    idx = n
+    for i in range(n-1, -1, -1):
+        if num_list[i] <= target:
+            idx = i + 1
+            break
+    # idx 이후 값들을 내려야 함
+    cost = (prefix_sum[n] - prefix_sum[idx]) - target * (n - idx)
+    return cost
 
-        # 오른쪽 비용 (arr[j..N-1]을 arr[i]+K로 내리기)
-        right_cost = (prefix[N] - prefix[j]) - (arr[i] + K) * (N - j)
+# 최소 비용 계산
+low_cost = float('inf')
+for i in range(diff_need_to_be_modified + 1):
+    curr_cost = get_cost_from_bottom(i) + get_cost_from_top(diff_need_to_be_modified - i)
+    low_cost = min(low_cost, curr_cost)
 
-        total_cost = left_cost + right_cost
-        ans = min(ans, total_cost)
-
-    print(ans)
-
-
-if __name__ == "__main__":
-    solve()
+print(low_cost)
