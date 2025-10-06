@@ -1,39 +1,41 @@
-def can_make(arr, D, K):
-    # arr의 모든 원소를 어떤 [x, x+D] 구간 안에 넣을 수 있는지 확인
-    n = len(arr)
-    min_val, max_val = min(arr), max(arr)
-    # 구간 시작점 x를 arr 원소 기준으로 잡아보며 검사
-    # 최적화를 위해 x 후보는 arr[i] ~ arr[i]+D
-    possible = False
-    for a in arr:
-        left, right = a, a + D
-        cost = 0
-        for v in arr:
-            if v < left:
-                cost += (left - v)
-            elif v > right:
-                cost += (v - right)
-            if cost > K:  # 이미 초과하면 중단
-                break
-        if cost <= K:
-            possible = True
-            break
-    return possible
-
-
 def solve():
     import sys
     input = sys.stdin.readline
 
     N, K = map(int, input().split())
     arr = list(map(int, input().split()))
+    arr.sort()
 
-    lo, hi = 0, max(arr) - min(arr)
+    prefix = [0] * (N + 1)  # 누적합
+    for i in range(N):
+        prefix[i+1] = prefix[i] + arr[i]
+
+    # 특정 구간 [L, L+D] 안에 모두 넣을 때 비용 계산
+    def cost(L, D):
+        R = L + D
+        # 왼쪽: arr < L
+        # 오른쪽: arr > R
+        import bisect
+        li = bisect.bisect_left(arr, L)   # arr[0..li-1] < L
+        ri = bisect.bisect_right(arr, R)  # arr[ri..N-1] > R
+
+        left_cost = L*li - prefix[li]
+        right_cost = (prefix[N] - prefix[ri]) - R*(N-ri)
+        return left_cost + right_cost
+
+    # 이분 탐색
+    lo, hi = 0, arr[-1] - arr[0]
     ans = hi
 
     while lo <= hi:
         mid = (lo + hi) // 2
-        if can_make(arr, mid, K):
+        ok = False
+        # arr 원소들을 시작점 후보로 잡기
+        for a in arr:
+            if cost(a, mid) <= K:
+                ok = True
+                break
+        if ok:
             ans = mid
             hi = mid - 1
         else:
