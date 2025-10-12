@@ -9,7 +9,7 @@ for i in range(N):
         if(i == j):
             continue
         else:
-            for k in range(grid[i][0], grid[i][1] + 1):
+            for k in range(grid[j][0], grid[j][1] + 1):
                 sep[k] += 1
     for j in range(101):
         if(sep[j] == N - 1):
