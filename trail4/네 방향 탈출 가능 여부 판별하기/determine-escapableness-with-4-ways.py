@@ -1,4 +1,6 @@
 from collections import deque
+import sys
+input = sys.stdin.readline
 
 N, M = map(int, input().split())
 grid = [list(map(int, input().split())) for _ in range(N)]
