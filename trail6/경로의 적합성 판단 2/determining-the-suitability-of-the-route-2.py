@@ -1,37 +1,27 @@
 import sys
 input = sys.stdin.readline
 
-def find(x):
-    while parent[x] != x:
-        parent[x] = parent[parent[x]]
-        x = parent[x]
-    return x
-
-def union(a, b):
-    ra, rb = find(a), find(b)
-    if ra == rb:
-        return
-    if rank[ra] < rank[rb]:
-        ra, rb = rb, ra
-    parent[rb] = ra
-    if rank[ra] == rank[rb]:
-        rank[ra] += 1
-
 n, m, k = map(int, input().split())
+arr = [i for i in range(n + 1)]
 
-parent = list(range(n + 1))
-rank = [0] * (n + 1)
+def find(x):
+    if(x != arr[x]):
+        arr[x] = find(arr[x])
+    return arr[x]
 
-for _ in range(m):
-    a, b = map(int, input().split())
-    union(a, b)
+def union(x, y):
+    r1 = find(x)
+    r2 = find(y)
+    arr[r1] = r2
 
-path = list(map(int, input().split()))
+for i in range(m):
+    num1, num2 = map(int, input().split())
+    union(num1, num2)
 
-ok = True
-for i in range(k - 1):
-    if find(path[i]) != find(path[i + 1]):
-        ok = False
-        break
+point = list(map(int, input().split()))
+check = 1
+for i in range(1, len(point)):
+    if(find(point[i]) != find(point[i - 1])):
+        check = 0
 
-print(1 if ok else 0)
+print(check)
